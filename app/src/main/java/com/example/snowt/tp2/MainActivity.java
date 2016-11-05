@@ -3,6 +3,7 @@ package com.example.snowt.tp2;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ListFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -17,7 +18,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,11 +42,13 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager mViewPager;
 
 
+    ArrayList<Information> listeEnvoi;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        listeEnvoi = new ArrayList<Information>();
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -54,7 +61,14 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
+        listeEnvoi.add(new Information("info1"));
+        listeEnvoi.add(new Information("info2"));
+        listeEnvoi.add(new Information("info3"));
+        listeEnvoi.add(new Information("info4"));
+        listeEnvoi.add(new Information("info5"));
 
+        // NE MARCHE PAS
+        //((ListView) findViewById(R.id.lv_envoi)).setAdapter(new CustomAdapterInfoEnvoi(this, listeEnvoi));
 
     }
 
@@ -112,7 +126,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-
             switch (getArguments().getInt(ARG_SECTION_NUMBER)){
                 case 1: {
                     rootView = inflater.inflate(R.layout.fragment_main, container, false);
