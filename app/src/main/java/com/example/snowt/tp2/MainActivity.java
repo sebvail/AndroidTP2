@@ -1,5 +1,6 @@
 package com.example.snowt.tp2;
 
+import android.graphics.Bitmap;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -44,7 +45,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     ArrayList<Information> listeEnvoi;
-
+    public void ajouterListe(String info){
+        listeEnvoi.add(new Information(info));
+    }
+    public void retirerListe(String info){
+        listeEnvoi.remove(new Information(info));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -136,10 +142,22 @@ public class MainActivity extends AppCompatActivity {
                 }
                 case 2: {
                     rootView = inflater.inflate(R.layout.envoi_layout,container, false);
+                    (rootView.findViewById(R.id.btnEnvoyerInfo)).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Bitmap bmp = QREncoder.encodeAsBitmap(rootView.findViewById(R.id.txtEnvoiInfo).toString());
+                        }
+                    });
                     (rootView.findViewById(R.id.btnAjouterEnvoi)).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            //QrEncoder.encodeAsBitmap(rootView.findViewById(R.id.txtEnvoiInfo));
+                            ((MainActivity)getActivity()).ajouterListe(rootView.findViewById(R.id.txtEnvoiInfo).toString());
+                        }
+                    });
+                    (rootView.findViewById(R.id.btnSupprimerInfo)).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            ((MainActivity)getActivity()).retirerListe(rootView.findViewById(R.id.txtEnvoiInfo).toString());
                         }
                     });
                     break;
