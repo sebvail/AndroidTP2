@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void updateAdapterListeEnvoi(){
         ListView lv = ((ListView) findViewById(R.id.lv_envoi));
-        CustomAdapterInfoEnvoi adapter = new CustomAdapterInfoEnvoi(MainActivity.this, R.layout.envoi_layout, listeEnvoi);
+        CustomAdapterInfoEnvoi adapter = new CustomAdapterInfoEnvoi(MainActivity.this, listeEnvoi);
         lv.setAdapter(adapter);
     }
 
@@ -149,19 +149,19 @@ public class MainActivity extends AppCompatActivity {
                     (rootView.findViewById(R.id.btnEnvoyerInfo)).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Bitmap bmp = QREncoder.encodeAsBitmap(rootView.findViewById(R.id.txtEnvoiInfo).toString());
+                            Bitmap bmp = QREncoder.encodeAsBitmap((rootView.findViewById(R.id.txtEnvoiInfo)).toString());
                         }
                     });
                     (rootView.findViewById(R.id.btnAjouterEnvoi)).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            ((MainActivity)getActivity()).ajouterListe(rootView.findViewById(R.id.txtEnvoiInfo).toString());
+                            ((MainActivity)getActivity()).ajouterListe((rootView.findViewById(R.id.txtEnvoiInfo)).toString());
                         }
                     });
                     (rootView.findViewById(R.id.btnSupprimerInfo)).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            ((MainActivity)getActivity()).retirerListe(rootView.findViewById(R.id.txtEnvoiInfo).toString());
+                            ((MainActivity)getActivity()).retirerListe((rootView.findViewById(R.id.txtEnvoiInfo)).toString());
                         }
                     });
                     break;
