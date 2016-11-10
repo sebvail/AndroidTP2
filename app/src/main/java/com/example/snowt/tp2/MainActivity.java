@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -163,7 +164,9 @@ public class MainActivity extends AppCompatActivity {
                     (rootView.findViewById(R.id.btnEnvoyerInfo)).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Bitmap bmp = QREncoder.encodeAsBitmap(rootView.findViewById(R.id.txtEnvoiInfo).toString());
+                            Bitmap bmp = QREncoder.encodeAsBitmap(rootView.findViewById(R.id.editAjouterEnvoi).toString());
+                            ImageView iv = (ImageView)rootView.findViewById(R.id.imageView);
+                            iv.setImageBitmap(bmp);
                         }
                     });
                     (rootView.findViewById(R.id.btnAjouterEnvoi)).setOnClickListener(new View.OnClickListener() {

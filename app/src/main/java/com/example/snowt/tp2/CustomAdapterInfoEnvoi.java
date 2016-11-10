@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 
 public class CustomAdapterInfoEnvoi extends ArrayAdapter<Information> {
-    public CustomAdapterInfoEnvoi(Context context,int ressource, ArrayList<Information> infos) {
+    public CustomAdapterInfoEnvoi(Context context, int ressource, ArrayList<Information> infos) {
         super(context, ressource, infos);
     }
 
