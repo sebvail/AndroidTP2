@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -54,8 +55,9 @@ public class MainActivity extends AppCompatActivity {
         updateAdapterListeEnvoi();
     }
     public void updateAdapterListeEnvoi(){
+        setContentView(R.layout.activity_main);
         ListView lv = ((ListView) findViewById(R.id.lv_envoi));
-        CustomAdapterInfoEnvoi adapter = new CustomAdapterInfoEnvoi(MainActivity.this, listeEnvoi);
+        CustomAdapterInfoEnvoi adapter = new CustomAdapterInfoEnvoi(MainActivity.this, R.layout.envoi_layout, listeEnvoi);
         lv.setAdapter(adapter);
     }
 
@@ -132,13 +134,20 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        View rootView;
+        View  rootView;
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
+        {
+            final ArrayList<Information> listeEnvoi = new ArrayList<>();
+            listeEnvoi.add(new Information("info1"));
+            listeEnvoi.add(new Information("info2"));
+            listeEnvoi.add(new Information("info3"));
+            listeEnvoi.add(new Information("info4"));
+            listeEnvoi.add(new Information("info5"));
             switch (getArguments().getInt(ARG_SECTION_NUMBER)){
                 case 1: {
+
                     rootView = inflater.inflate(R.layout.fragment_main, container, false);
                     TextView textView = (TextView) rootView.findViewById(R.id.section_label);
                     textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
@@ -149,19 +158,24 @@ public class MainActivity extends AppCompatActivity {
                     (rootView.findViewById(R.id.btnEnvoyerInfo)).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Bitmap bmp = QREncoder.encodeAsBitmap((rootView.findViewById(R.id.txtEnvoiInfo)).toString());
+                            Bitmap bmp = QREncoder.encodeAsBitmap(rootView.findViewById(R.id.txtEnvoiInfo).toString());
                         }
                     });
                     (rootView.findViewById(R.id.btnAjouterEnvoi)).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            ((MainActivity)getActivity()).ajouterListe((rootView.findViewById(R.id.txtEnvoiInfo)).toString());
+                            EditText txt = (EditText)rootView.findViewById(R.id.editAjouterEnvoi);
+                            String text = txt.getText().toString();
+                            listeEnvoi.add(new Information(text));
+                            ListView lv = (ListView)rootView.findViewById(R.id.lv_envoi);
+                            CustomAdapterInfoEnvoi adapter = new CustomAdapterInfoEnvoi(getActivity().getBaseContext(),R.layout.envoi_layout,listeEnvoi);
+                            lv.setAdapter(adapter);
                         }
                     });
                     (rootView.findViewById(R.id.btnSupprimerInfo)).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            ((MainActivity)getActivity()).retirerListe((rootView.findViewById(R.id.txtEnvoiInfo)).toString());
+                            ((MainActivity)getActivity()).retirerListe(rootView.findViewById(R.id.txtEnvoiInfo).toString());
                         }
                     });
                     break;
