@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context="com.example.snowt.tp2.MainActivity"
-    tools:showIn="@layout/activity_main">
+    tools:showIn="@layout/activity_scan">
 
     <Button
         android:layout_width="wrap_content"

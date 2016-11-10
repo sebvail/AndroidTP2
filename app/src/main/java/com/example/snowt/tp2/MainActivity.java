@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
      */
     Bitmap bmp;
     ImageView iv2;
-    private SectionsPagerAdapter mSectionsPagerAdapter;
+    private static SectionsPagerAdapter mSectionsPagerAdapter;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -132,20 +132,7 @@ public class MainActivity extends AppCompatActivity {
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
 
-        public PlaceholderFragment() {
-        }
 
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
 
 
         View  rootView;
@@ -164,8 +151,10 @@ public class MainActivity extends AppCompatActivity {
             listeEnvoi.add(new Information("info5"));
             switch (getArguments().getInt(ARG_SECTION_NUMBER)){
                 case 1: {
-                    Fragment fragment = getFragmentManager().findFragmentByTag("android:switcher:2131558525:0");
-                    if(rootView != null) {
+
+                    Fragment fragment =  mSectionsPagerAdapter.getItem(0);
+                    //Fragment fragment = getFragmentManager().findFragmentByTag("android:switcher:2131558525:0");
+                    /*if(rootView != null) {
                         List<Fragment> frg = new ArrayList<Fragment>();
                         frg = getFragmentManager().getFragments();
                         getFragmentManager().beginTransaction().remove(fragment).commit();
@@ -176,11 +165,12 @@ public class MainActivity extends AppCompatActivity {
                         iv2 = (ImageView) rootView.findViewById(R.id.imageView);
                         bmp = QREncoder.encodeAsBitmap("yo");
                         iv2.setImageBitmap(bmp);
-                    }
+                    }*/
                     break;
                 }
                 case 2: {
-                    rootView = inflater.inflate(R.layout.envoi_layout,container, false);
+                    Fragment fragment =  mSectionsPagerAdapter.getItem(1);
+                    /*rootView = inflater.inflate(R.layout.envoi_layout,container, false);
                     views = inflater.inflate(R.layout.activity_scan, container, false);
                     (rootView.findViewById(R.id.btnEnvoyerInfo)).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -219,11 +209,12 @@ public class MainActivity extends AppCompatActivity {
                             ((MainActivity)getActivity()).retirerListe(rootView.findViewById(R.id.txtEnvoiInfo).toString());
 
                         }
-                    });
+                    });*/
                     break;
                 }
                 case 3: {
-                    rootView = inflater.inflate(R.layout.recu_layout,container,false);
+                    Fragment fragment =  mSectionsPagerAdapter.getItem(2);
+                    /*rootView = inflater.inflate(R.layout.recu_layout,container,false);*/
                     break;
                 }
             }
@@ -245,10 +236,25 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
+
+            Fragment f=null;
+
+            if (position ==0){
+                f = new FragmentHome();
+            }
+            else if (position==1){
+                f= new FragmentEnvoi();
+
+            }
+            else if (position ==2){
+                f = new FragmentRecu();
+            }
+
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
-        }
+
+
+            return f;        }
 
         @Override
         public int getCount() {
@@ -313,9 +319,9 @@ public class MainActivity extends AppCompatActivity {
             IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
             if(result != null) {
                 if(result.getContents() == null) {
-                    toast = "Cancelled from fragment";
+                    toast = "Scan cancellé";
                 } else {
-                    toast = "Scanned from fragment: " + result.getContents();
+                    toast = "Résultat du Scan " + result.getContents();
                 }
 
                 // At this point we may or may not have a reference to the activity
