@@ -7,12 +7,12 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.snowt.tp2.PlaceholderFragment">
+    tools:context="com.example.snowt.tp2.MainActivity$PlaceholderFragment">
 
 
     <ImageView
         android:layout_width="match_parent"
-        app:srcCompat="@android:color/holo_blue_dark"
+
         android:id="@+id/imageView"
         android:layout_height="230dp"
         android:layout_alignParentBottom="true"
@@ -22,8 +22,8 @@
         android:id="@+id/fragment_scan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        android:name="com.example.snowt.tp2.ScanFragment" tools:layout="@layout/fragment_scan"
+        android:tag="fragment"
+        android:name="com.example.snowt.tp2.MainActivity$ScanFragment" tools:layout="@layout/fragment_scan"
         android:layout_above="@+id/imageView"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="98dp" />
