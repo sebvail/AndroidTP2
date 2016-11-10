@@ -25,7 +25,7 @@ public class CustomAdapterInfoEnvoi extends ArrayAdapter<Information> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.information_layout, parent, false);
         }
         TextView txtEnvoiInfo = (TextView) convertView.findViewById(R.id.txtEnvoiInfo);
-        txtEnvoiInfo.setText(i.getInfo());
+        txtEnvoiInfo.setText(i.info);
         return convertView;
     }
 }

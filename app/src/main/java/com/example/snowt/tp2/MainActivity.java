@@ -1,6 +1,7 @@
 package com.example.snowt.tp2;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -20,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,6 +52,20 @@ public class MainActivity extends AppCompatActivity {
 
 
     ArrayList<Information> listeEnvoi;
+    public void ajouterListe(String info){
+        listeEnvoi.add(new Information(info));
+        updateAdapterListeEnvoi();
+    }
+    public void retirerListe(String info){
+        listeEnvoi.remove(new Information(info));
+        updateAdapterListeEnvoi();
+    }
+    public void updateAdapterListeEnvoi(){
+        setContentView(R.layout.activity_main);
+        ListView lv = ((ListView) findViewById(R.id.lv_envoi));
+        CustomAdapterInfoEnvoi adapter = new CustomAdapterInfoEnvoi(MainActivity.this, R.layout.envoi_layout, listeEnvoi);
+        lv.setAdapter(adapter);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,10 +89,6 @@ public class MainActivity extends AppCompatActivity {
         listeEnvoi.add(new Information("info3"));
         listeEnvoi.add(new Information("info4"));
         listeEnvoi.add(new Information("info5"));
-
-        // NE MARCHE PAS
-        //((ListView) findViewById(R.id.lv_envoi)).setAdapter(new CustomAdapterInfoEnvoi(this, listeEnvoi));
-
     }
 
 
@@ -128,11 +140,17 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        View rootView;
+        View  rootView;
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
+        {
+            final ArrayList<Information> listeEnvoi = new ArrayList<>();
+            listeEnvoi.add(new Information("info1"));
+            listeEnvoi.add(new Information("info2"));
+            listeEnvoi.add(new Information("info3"));
+            listeEnvoi.add(new Information("info4"));
+            listeEnvoi.add(new Information("info5"));
             switch (getArguments().getInt(ARG_SECTION_NUMBER)){
                 case 1: {
                     rootView = inflater.inflate(R.layout.activity_scan, container, false);
@@ -142,10 +160,27 @@ public class MainActivity extends AppCompatActivity {
                 }
                 case 2: {
                     rootView = inflater.inflate(R.layout.envoi_layout,container, false);
+                    (rootView.findViewById(R.id.btnEnvoyerInfo)).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Bitmap bmp = QREncoder.encodeAsBitmap(rootView.findViewById(R.id.txtEnvoiInfo).toString());
+                        }
+                    });
                     (rootView.findViewById(R.id.btnAjouterEnvoi)).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            //QrEncoder.encodeAsBitmap(rootView.findViewById(R.id.txtEnvoiInfo));
+                            EditText txt = (EditText)rootView.findViewById(R.id.editAjouterEnvoi);
+                            String text = txt.getText().toString();
+                            listeEnvoi.add(new Information(text));
+                            ListView lv = (ListView)rootView.findViewById(R.id.lv_envoi);
+                            CustomAdapterInfoEnvoi adapter = new CustomAdapterInfoEnvoi(getActivity().getBaseContext(),R.layout.envoi_layout,listeEnvoi);
+                            lv.setAdapter(adapter);
+                        }
+                    });
+                    (rootView.findViewById(R.id.btnSupprimerInfo)).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            ((MainActivity)getActivity()).retirerListe(rootView.findViewById(R.id.txtEnvoiInfo).toString());
                         }
                     });
                     break;
