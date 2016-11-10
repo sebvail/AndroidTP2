@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Created by nicta on 2016-11-05.
+ * Created by nictamere on 2016-11-05.
  */
 
 public class CustomAdapterInfoEnvoi extends ArrayAdapter<Information> {

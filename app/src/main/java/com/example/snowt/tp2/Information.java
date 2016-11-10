@@ -1,7 +1,7 @@
 package com.example.snowt.tp2;
 
 /**
- * Created by nicta on 2016-11-05.
+ * Created by nictamere on 2016-11-05.
  */
 
 public class Information {
