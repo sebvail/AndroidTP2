@@ -53,10 +53,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     ArrayList<Information> listeEnvoi;
-    public void ajouterListe(String info){
-        listeEnvoi.add(new Information(info));
-        updateAdapterListeEnvoi();
-    }
     public void retirerListe(String info){
         listeEnvoi.remove(new Information(info));
         updateAdapterListeEnvoi();

@@ -81,7 +81,10 @@ public class PlaceholderFragment extends Fragment {
                 (rootView.findViewById(R.id.btnSupprimerInfo)).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        ((MainActivity)getActivity()).retirerListe(rootView.findViewById(R.id.txtEnvoiInfo).toString());
+                        listeEnvoi.remove(new Information(rootView.findViewById(R.id.txtEnvoiInfo).toString()));
+                        ListView lv = (ListView)rootView.findViewById(R.id.lv_envoi);
+                        CustomAdapterInfoEnvoi adapter = new CustomAdapterInfoEnvoi(getActivity().getBaseContext(),R.layout.envoi_layout,listeEnvoi);
+                        lv.setAdapter(adapter);
                     }
                 });
                 break;
