@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -135,6 +136,12 @@ public class MainActivity extends AppCompatActivity {
                 }
                 case 2: {
                     rootView = inflater.inflate(R.layout.envoi_layout,container, false);
+                    (rootView.findViewById(R.id.btnAjouterEnvoi)).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            //QrEncoder.encodeAsBitmap(rootView.findViewById(R.id.txtEnvoiInfo));
+                        }
+                    });
                     break;
                 }
                 case 3: {

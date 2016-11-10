@@ -6,21 +6,8 @@
 
     <TextView
         android:text="TextView"
-        android:layout_width="145dp"
-        android:layout_height="54dp"
+        android:layout_width="match_parent"
+        android:layout_height="29dp"
         android:id="@+id/txtEnvoiInfo" />
-
-    <Button
-        android:text="Envoyer"
-        android:layout_width="104dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnEnvoi"
-        android:layout_weight="0.32" />
-
-    <Button
-        android:text="Supprimer"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnSupprimer"
-        android:layout_width="104dp" />
 
 </LinearLayout>

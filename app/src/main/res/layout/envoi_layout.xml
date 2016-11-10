@@ -16,8 +16,20 @@
         android:layout_height="wrap_content"
         android:id="@+id/btnAjouterEnvoi" />
 
+    <Button
+        android:text="Envoyer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnEnvoyerInfo" />
+
+    <Button
+        android:text="Supprimer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnSupprimerInfo" />
+
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="419dp"
+        android:layout_height="match_parent"
         android:id="@+id/lv_envoi" />
 </LinearLayout>
