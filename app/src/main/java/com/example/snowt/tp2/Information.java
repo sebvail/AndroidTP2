@@ -11,7 +11,7 @@ public class Information  {
         info=i;
     }
 
-    private String info;
+    protected String info;
 
     public void setInfo(String i){
         info = i;

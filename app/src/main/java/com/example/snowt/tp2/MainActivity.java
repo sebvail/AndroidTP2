@@ -54,14 +54,16 @@ public class MainActivity extends AppCompatActivity {
         updateAdapterListeEnvoi();
     }
     public void updateAdapterListeEnvoi(){
-        ((ListView) findViewById(R.id.lv_envoi)).setAdapter(new CustomAdapterInfoEnvoi(this, listeEnvoi));
+        ListView lv = ((ListView) findViewById(R.id.lv_envoi));
+        CustomAdapterInfoEnvoi adapter = new CustomAdapterInfoEnvoi(MainActivity.this, R.layout.envoi_layout, listeEnvoi);
+        lv.setAdapter(adapter);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        listeEnvoi = new ArrayList<Information>();
+        listeEnvoi = new ArrayList<>();
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -79,9 +81,6 @@ public class MainActivity extends AppCompatActivity {
         listeEnvoi.add(new Information("info3"));
         listeEnvoi.add(new Information("info4"));
         listeEnvoi.add(new Information("info5"));
-
-        updateAdapterListeEnvoi();
-
     }
 
 
