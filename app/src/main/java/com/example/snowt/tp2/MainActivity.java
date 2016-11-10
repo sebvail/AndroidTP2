@@ -47,10 +47,16 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Information> listeEnvoi;
     public void ajouterListe(String info){
         listeEnvoi.add(new Information(info));
+        updateAdapterListeEnvoi();
     }
     public void retirerListe(String info){
         listeEnvoi.remove(new Information(info));
+        updateAdapterListeEnvoi();
     }
+    public void updateAdapterListeEnvoi(){
+        ((ListView) findViewById(R.id.lv_envoi)).setAdapter(new CustomAdapterInfoEnvoi(this, listeEnvoi));
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,8 +80,7 @@ public class MainActivity extends AppCompatActivity {
         listeEnvoi.add(new Information("info4"));
         listeEnvoi.add(new Information("info5"));
 
-        // NE MARCHE PAS
-        //((ListView) findViewById(R.id.lv_envoi)).setAdapter(new CustomAdapterInfoEnvoi(this, listeEnvoi));
+        updateAdapterListeEnvoi();
 
     }
 
@@ -167,7 +172,6 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 }
             }
-
 
             return rootView;
         }
